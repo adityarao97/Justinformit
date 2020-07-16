@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "896682999583",
+    "firebase_url": "https://hackiq-2020-seekers.firebaseio.com",
+    "project_id": "hackiq-2020-seekers",
+    "storage_bucket": "hackiq-2020-seekers.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:896682999583:android:605cd7da8e48fba330ba2a",
+        "android_client_info": {
+          "package_name": "com.example.justInformIt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "896682999583-t80k85j86bbjdovft7deka17toubochn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUxFf9N_6WZIDwBrn8Rd5gl5ZVIaXPzlI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "896682999583-t80k85j86bbjdovft7deka17toubochn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
