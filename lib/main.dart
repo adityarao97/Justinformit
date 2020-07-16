@@ -127,7 +127,7 @@ class MailSender extends StatelessWidget {
   }
 
   _launchCall(String phoneNumber) async {
-    var teli = "tel:$phoneNumber";
+    var teli = "tel:*31#$phoneNumber";
     if (await canLaunch(teli)) {
       await launch(teli);
     } else {
