@@ -8,29 +8,7 @@ class Dashboard extends StatefulWidget {
 
 class DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("JustInformit"),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.tune),
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return Scaffold(
-                        appBar: AppBar(title: Text('Saved WordPairs')),
-                        body: Dashboard());
-                  }));
-                }),
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () {
-                print('Settings button pressed');
-              },
-            ),
-          ],
-        ),
-        body: _buildStack());
+    return Scaffold(body: _buildStack());
   }
 
   Widget _buildStack() {
@@ -43,20 +21,20 @@ class DashboardState extends State<Dashboard> {
           width: 400,
           alignment: Alignment(-0.75, -0.75),
           child: _pieChart()),
-      Container(
-        alignment: Alignment(-0.5, 0.25),
-        child: Text(
-          "hello world",
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
-      Container(
-        alignment: Alignment(0.5, 0.25),
-        child: Text(
-          "lorem ipsum",
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      // Container(
+      //   alignment: Alignment(-0.5, 0.25),
+      //   child: Text(
+      //     "hello world",
+      //     style: TextStyle(fontSize: 20),
+      //   ),
+      // ),
+      // Container(
+      //   alignment: Alignment(0.5, 0.25),
+      //   child: Text(
+      //     "lorem ipsum",
+      //     style: TextStyle(fontSize: 20),
+      //   ),
+      // ),
     ]);
   }
 
