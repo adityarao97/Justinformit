@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:justInformIt/geolocation.dart';
 import './dashboard.dart';
 import './homepage.dart';
 import './addreport.dart';
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(primaryColor: Colors.purple[900]), home: Homepage());
+        theme: ThemeData(primaryColor: Colors.purple[900]),
+        home: GeoLocation());
   }
 }
