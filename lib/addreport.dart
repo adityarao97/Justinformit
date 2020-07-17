@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './mailSender.dart';
+import './HttpOperations.dart';
+import './HttpResponse.dart';
 
 class Report {
   String mailId;
@@ -44,6 +46,7 @@ class AddreportState extends State<Addreport> {
   Report reporting = Report();
 
   void report() {
+    Future<User> user = fetchUsersFromGitHub();
     setState(() {
       category = crimeInput;
     });
