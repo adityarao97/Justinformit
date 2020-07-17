@@ -3,24 +3,29 @@ import 'dart:async';
 import 'dart:convert';
 import './HttpResponse.dart';
 
-Future<User> fetchUsersFromGitHub() async {
+void fetchUsersFromGitHub() async {
   var queryParameters = {
-    'id': '2',
-    'response': 'hello',
+    'id': "2",
+    'response': "hello",
   };
-  var uri = Uri.https('h86il5tzc2.execute-api.us-east-1.amazonaws.com',
-      '/test/', queryParameters);
+  var uri = Uri.http('google.com:8080/', '/test');
 
   final response = await http.get(uri);
-  print(response.body);
-  Map<String, dynamic> map = json.decode(response.body);
+
+  if (response.statusCode == 200) {
+    print(response.body);
+    //return User.fromJson(json.decode(response.body));
+  } else {
+    throw Exception("failed to load request");
+  }
+  //Map<String, dynamic> map = json.decode(response.body);
   // List<dynamic> data = map[""];
-  print(map);
+  //print(map);
   // User user = User.fromJson(jsonDecode(responseJson));
-  User user = new User(map["body"]["id"].toString(),
-      map["body"]["response"].toString(), map["body"]["persecutor"].toString());
-  print(user);
-  return user;
+  // User user = new User(map["body"]["id"].toString(),
+  //     map["body"]["response"].toString(), map["body"]["persecutor"].toString());
+  // print(user);
+  // return user;
 }
 
 // class HttpOperationsState extends State<HttpOperations> {

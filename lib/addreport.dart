@@ -47,7 +47,7 @@ class AddreportState extends State<Addreport> {
   Future<User> user;
 
   void report() {
-    user = fetchUsersFromGitHub();
+    fetchUsersFromGitHub();
     setState(() {
       category = crimeInput;
     });
