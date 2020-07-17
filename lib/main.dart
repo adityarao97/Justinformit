@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import './crime.dart';
+import './mailSender.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class Report {
   String mailId;
@@ -35,103 +34,79 @@ class Report {
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyAppState();
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+class MyAppState extends State<MyApp> {
+  var crimes = Crime(1, 'category', 'value', 'email', 'phoneNo');
+  var arrayOfCrimes = [
+    {'id': 1, 'subdomainId': 1, 'value': 'child abuse'},
+    {'id': 2, 'subdomainId': 1, 'value': 'child prostitution'},
+    {'id': 3, 'subdomainId': 1, 'value': 'child harassment'},
+    {'id': 4, 'subdomainId': 1, 'value': 'child exploitation'},
+    {'id': 5, 'subdomainId': 2, 'value': 'human trafficking'},
+    {'id': 6, 'subdomainId': 2, 'value': 'manual scavenging'},
+    {'id': 7, 'subdomainId': 3, 'value': 'prostitution'},
+    {'id': 8, 'subdomainId': 4, 'value': 'racial discrimination'}
+  ];
+  String crimeInput = "";
+  var subDomain = 'Crime Subdomain';
 
-class _MyHomePageState extends State<MyHomePage> {
-  Report report = Report();
+  void report() {
+    var crimeEntered = arrayOfCrimes.firstWhere(
+        (dropdown) => dropdown['value'] == crimeInput.toLowerCase());
+    print(crimeEntered);
+    setState(() {
+      subDomain = crimes.returnCategory();
+    });
+  }
+
+  Report reporting = Report();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+    return new MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('justinformit'),
+        ),
+        body: Column(
+          children: [
+            TextField(
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(hintText: 'Report a crime here'),
+              onChanged: (text) {
+                crimeInput = text;
+              },
+            ),
             RaisedButton(
               child: Text('Report'),
-              onPressed: () {
-                report.setMailId("sumanthmurali48@gmail.com");
-                report.setMailSubject("Test 1");
-                report.setPhoneNumber("Testing passing the object");
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MailSender(
-                          mailId: report.getMailId(),
-                          mailSubject: report.getMailSubject())),
-                );
-              },
-            )
+              onPressed: report,
+            ),
+            Text(subDomain),
+            Builder(
+                builder: (context) => RaisedButton(
+                    child: Text('Report now'),
+                    onPressed: () {
+                      reporting.setMailId("test@gmail.com");
+                      reporting.setMailSubject("Test 1");
+                      reporting.setPhoneNumber("Testing passing the object");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MailSender(
+                                mailId: reporting.getMailId(),
+                                mailSubject: reporting.getMailSubject(),
+                                phoneNumber: reporting.getPhoneNumber())),
+                      );
+                    })),
           ],
         ),
       ),
     );
-  }
-}
-
-class MailSender extends StatelessWidget {
-  final String mailId;
-  final String mailSubject;
-  MailSender({@required this.mailId, @required this.mailSubject});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("Mail"),
-        ),
-        body: new Center(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RaisedButton(
-                  onPressed: () =>
-                      _launchURL(mailId, mailSubject, 'Testing mail sending'),
-                  child: new Text('Send mail'),
-                ),
-                RaisedButton(
-                  onPressed: () => _launchCall("919035386608"),
-                  child: new Text('Make call'),
-                ),
-              ]),
-        ));
-  }
-
-  _launchURL(String toMailId, String subject, String body) async {
-    var url = 'mailto:$toMailId?subject=$subject&body=$body';
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
-  _launchCall(String phoneNumber) async {
-    var teli = "tel:*31#$phoneNumber";
-    if (await canLaunch(teli)) {
-      await launch(teli);
-    } else {
-      throw 'Could not launch $teli';
-    }
   }
 }
