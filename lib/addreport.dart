@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:justInformIt/HttpOperations.dart';
+import 'package:justInformIt/HttpResponse.dart';
 import './mailSender.dart';
 
 class Report {
@@ -42,8 +44,10 @@ class AddreportState extends State<Addreport> {
   String crimeInput = "";
   String category = 'Crime Category';
   Report reporting = Report();
+  Future<User> user;
 
   void report() {
+    user = fetchUsersFromGitHub();
     setState(() {
       category = crimeInput;
     });
