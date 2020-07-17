@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './mailSender.dart';
 
 class Report {
   String mailId;
@@ -69,22 +70,22 @@ class AddreportState extends State<Addreport> {
               onPressed: report,
             ),
             Text(category),
-            // Builder(
-            //     builder: (context) => RaisedButton(
-            //         child: Text('Report now'),
-            //         onPressed: () {
-            //           reporting.setMailId("test@gmail.com");
-            //           reporting.setMailSubject("Test 1");
-            //           reporting.setPhoneNumber("Testing passing the object");
-            //           Navigator.push(
-            //             context,
-            //             MaterialPageRoute(
-            //                 builder: (context) => MailSender(
-            //                     mailId: reporting.getMailId(),
-            //                     mailSubject: reporting.getMailSubject(),
-            //                     phoneNumber: reporting.getPhoneNumber())),
-            //           );
-            //         })),
+            Builder(
+                builder: (context) => RaisedButton(
+                    child: Text('Report now'),
+                    onPressed: () {
+                      reporting.setMailId("test@gmail.com");
+                      reporting.setMailSubject("Test 1");
+                      reporting.setPhoneNumber("Testing passing the object");
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MailSender(
+                                mailId: reporting.getMailId(),
+                                mailSubject: reporting.getMailSubject(),
+                                phoneNumber: reporting.getPhoneNumber())),
+                      );
+                    })),
           ],
         ),
       ),
