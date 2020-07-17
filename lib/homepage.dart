@@ -29,7 +29,15 @@ class HomepageState extends State<Homepage> {
               Icon(Icons.chat),
             ],
           ),
-          floatingActionButton: FloatingActionButton,
+          floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Addreport(),
+                    ));
+              }),
         ),
       ),
     );

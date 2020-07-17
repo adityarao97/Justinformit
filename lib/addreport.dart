@@ -1,54 +1,93 @@
 import 'package:flutter/material.dart';
 
+class Report {
+  String mailId;
+  String mailSubject;
+  String phoneNumber;
+
+  void setMailId(String mailId) {
+    this.mailId = mailId;
+  }
+
+  void setMailSubject(String mailSubject) {
+    this.mailSubject = mailSubject;
+  }
+
+  void setPhoneNumber(String phoneNumber) {
+    this.phoneNumber = phoneNumber;
+  }
+
+  String getMailId() {
+    return this.mailId;
+  }
+
+  String getMailSubject() {
+    return this.mailSubject;
+  }
+
+  String getPhoneNumber() {
+    return this.phoneNumber;
+  }
+}
+
 class Addreport extends StatefulWidget {
   @override
-  AddreportState createState() => AddreportState();
+  State<StatefulWidget> createState() {
+    return AddreportState();
+  }
 }
 
 class AddreportState extends State<Addreport> {
-  Widget _dropdownButton() {
-    String dropdownValue = 'One';
+  String crimeInput = "";
+  String category = 'Crime Category';
+  Report reporting = Report();
 
-    return DropdownButton<String>(
-      value: dropdownValue,
-      icon: Icon(Icons.arrow_downward),
-      iconSize: 24,
-      elevation: 16,
-      style: TextStyle(color: Colors.deepPurple),
-      underline: Container(
-        height: 2,
-        color: Colors.deepPurpleAccent,
-      ),
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue = newValue;
-        });
-      },
-      items: <String>['One', 'Two', 'Free', 'Four']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );
+  void report() {
+    setState(() {
+      category = crimeInput;
+    });
   }
 
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text("Addreport")),
-        body: Stack(children: <Widget>[
-          Container(
-            alignment: Alignment(0, -0.8),
-            child: TextField(
-              autocorrect: true,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'Enter a report'),
-              minLines: 5,
-              maxLines: 10,
+    return new MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Justinformit'),
+        ),
+        body: Column(
+          children: [
+            TextField(
+              textAlign: TextAlign.center,
+              decoration: InputDecoration(hintText: 'Report a crime here'),
+              onChanged: (text) {
+                crimeInput = text;
+              },
             ),
-          ),
-          Container(alignment: Alignment(0, 0), child: _dropdownButton())
-        ]));
+            RaisedButton(
+              child: Text('Report'),
+              onPressed: report,
+            ),
+            Text(category),
+            // Builder(
+            //     builder: (context) => RaisedButton(
+            //         child: Text('Report now'),
+            //         onPressed: () {
+            //           reporting.setMailId("test@gmail.com");
+            //           reporting.setMailSubject("Test 1");
+            //           reporting.setPhoneNumber("Testing passing the object");
+            //           Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => MailSender(
+            //                     mailId: reporting.getMailId(),
+            //                     mailSubject: reporting.getMailSubject(),
+            //                     phoneNumber: reporting.getPhoneNumber())),
+            //           );
+            //         })),
+          ],
+        ),
+      ),
+    );
   }
 }
