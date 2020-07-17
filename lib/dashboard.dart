@@ -13,11 +13,15 @@ class DashboardState extends State<Dashboard> {
           title: Text("JustInformit"),
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.tune),
-              onPressed: () {
-                print('Filter button pressed');
-              },
-            ),
+                icon: Icon(Icons.tune),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (BuildContext context) {
+                    return Scaffold(
+                        appBar: AppBar(title: Text('Saved WordPairs')),
+                        body: Dashboard());
+                  }));
+                }),
             IconButton(
               icon: Icon(Icons.settings),
               onPressed: () {
