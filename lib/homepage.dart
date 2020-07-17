@@ -11,6 +11,7 @@ class HomepageState extends State<Homepage> {
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
     return ListTile(
       title: Row(children: [
+        IconButton(icon: Icon(Icons.folder), onPressed: null),
         Expanded(
           child: Text(document['crime'], style: TextStyle(fontSize: 20)),
         ),
